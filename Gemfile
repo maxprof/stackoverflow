@@ -51,3 +51,4 @@ gem 'omniauth'
 gem 'omniauth-digitalocean'
 gem 'omniauth-vkontakte'
 gem 'omniauth-facebook'
+gem "table_print"
