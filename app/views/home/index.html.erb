@@ -2,4 +2,8 @@
 <p>Find me in app/views/home/index.html.erb</p>
 <% if user_signed_in? %>
 	<p><%= current_user.email %></p>
+	<%= link_to "Sign out",  destroy_user_session_path %>
+<% else %>
+	<%= link_to "Sign in",  new_user_session_path %>
+
 <% end %>
