@@ -12,7 +12,8 @@ Devise.setup do |config|
   config.password_length = 8..128
   config.reset_password_within = 6.hours
   config.sign_out_via = :get
-
+  config.mailer_sender = "maxprofkom@gmail.com"
+  
   #Add your ID and secret here
   #ID first, secret second
   config.omniauth :vkontakte, '5255623', 'DnkhBPj9o0LMj9tvQT5L',
