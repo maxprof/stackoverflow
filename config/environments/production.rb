@@ -26,4 +26,5 @@ Rails.application.configure do
         :enable_starttls_auto => true
   }
   config.action_mailer.raise_delivery_errors = true
+  config.secret_key = '12345678' if Rails.env == 'production'
 end
