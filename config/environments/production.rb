@@ -14,6 +14,8 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
   config.log_formatter = ::Logger::Formatter.new
   config.active_record.dump_schema_after_migration = false
+
+
   config.action_mailer.delivery_method = :smtp 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_options = { from: 'maxprofkom@gmail.com' }
@@ -24,9 +26,8 @@ Rails.application.configure do
         :port           => 587,
         :user_name      => ENV['maxprofkom@gmail.com'],
         :password       => ENV['yiykjrgpxhvvwfmy'],
-        :authentication => "plain",
+        :authentication => :plain
         :enable_starttls_auto => true
   }
   config.action_mailer.raise_delivery_errors = true
-  config.secret_key = '12345678' if Rails.env == 'production'
 end
