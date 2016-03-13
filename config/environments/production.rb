@@ -88,4 +88,5 @@ Rails.application.configure do
         :authentication => :login,
         :enable_starttls_auto => true
   }
+  config.action_mailer.raise_delivery_errors = true
 end
