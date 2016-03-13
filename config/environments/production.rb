@@ -14,7 +14,7 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
   config.log_formatter = ::Logger::Formatter.new
   config.active_record.dump_schema_after_migration = false
-  config.action_mailer.delivery_method = :sendmail 
+  config.action_mailer.delivery_method = :smtp 
   config.action_mailer.default_url_options = { :host => 'cinema-booking.herokuapp.com' }
   ActionMailer::Base.smtp_settings = {
         :address        => 'smtp.gmail.com',
@@ -22,7 +22,7 @@ Rails.application.configure do
         :port           => 587,
         :user_name      => ENV['maxprofkom@gmail.com'],
         :password       => ENV['yiykjrgpxhvvwfmy'],
-        :authentication => :login,
+        :authentication => "plain",
         :enable_starttls_auto => true
   }
   config.action_mailer.raise_delivery_errors = true
