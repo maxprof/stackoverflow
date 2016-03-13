@@ -22,7 +22,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'cinema-booking.herokuapp.com' }
   config.action_mailer.smtp_settings = {
         :address        => 'smtp.gmail.com',
-        :domain         => 'cinema-booking.herokuapp.com',
+        :domain         => 'gmail.com',
         :port           => 587,
         :user_name      => ENV['maxprofkom@gmail.com'],
         :password       => ENV['yiykjrgpxhvvwfmy'],
