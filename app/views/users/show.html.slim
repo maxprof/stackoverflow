@@ -1,0 +1,41 @@
+- if !@user.avatar_file_name
+  div class="row"
+    div class="col-md-6"
+      = image_tag("http://agapoff.name/wp-content/uploads/2009/12/gravatar.jpg", class:"img-responsive img-circle avatar_img")
+  /   = form_for @user do |form|
+  /   .col-md-8.col-md-offset-2.login_field align="center"
+  /     = form.text_field :login, class:"form-control", placeholder: "Enter your login"
+  /   .clearfix
+  /   span.btn.btn-primary.btn-file
+  /     | Browse file <%= form.file_field :avatar
+  /   .form-group
+  /     .col-md-offset-5
+  /       | = form.submit "Update user avatar", class:"btn btn-raised btn-danger m20"
+  / |  end
+- else
+div class="col-md-4"
+  = image_tag @user.avatar.url(:medium), class:"img-responsive"
+div class="col-md-8"
+  = simple_form_for(@user) do |form|
+    = form.text_field :login, class:"form-control", placeholder: "Enter your login"
+    br
+    = form.text_field :email, class:"form-control", placeholder: "Enter your email"
+    br
+    = form.text_field :password, class:"form-control", placeholder: "Enter your password"
+    br
+    = form.text_field :password_confirmation, class:"form-control", placeholder: "Enter confirmation password"
+    br
+    = form.text_field :date_of_birth, class:"form-control datepicker"
+    br
+    = form.input :country, as: :select, collection: ActionView::Helpers::FormOptionsHelper::COUNTRIES
+    = form.text_field :city, class:"form-control", placeholder: "Enter your city"
+    br
+    = form.text_field :address, class:"form-control", placeholder: "Enter your address"
+    br
+    = form.file_field :avatar
+    br
+    = form.submit "Update user profile", class:"btn btn-danger"
+br/
+#map_canvas style=("width:800px; height:600px")
+br/
+

@@ -10,8 +10,8 @@
     <%= f.input :login, required: true %>
     <%= f.label :date_of_birth, class:"control-group" %>
     <%= f.text_field :date_of_birth, class:"form-control datepicker", required: true %>
-    <%= f.input :city, required: true %>
     <%= f.input :country, as: :select, collection: ActionView::Helpers::FormOptionsHelper::COUNTRIES  %>
+    <%= f.input :city, required: true %>
     <%= f.input :address, required: true %>
     <%= f.input :avatar %>
   </div>

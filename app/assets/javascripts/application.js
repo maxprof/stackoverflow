@@ -22,4 +22,78 @@ $(document).ready(function() {
         dateFormat: 'yy-mm-dd'
       });
     });
+    $( ".form-control" ).change(function() {
+      get_user_address_if_input_changed();
+    });
 });
+function get_user_address_if_input_changed(){
+  var user_country = $("#user_country").val();
+  var user_city = $("#user_city").val();
+  var user_address = $("#user_address").val();
+  var full_user_address = user_country + " " + user_city + " " + user_address;
+  $.ajax({
+    url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + full_user_address,
+    type: "get",
+    success: function(data){
+      var lat = data.results[0].geometry.location.lat;
+      var lng = data.results[0].geometry.location.lng;
+      initialize(lat, lng);
+    },
+    error: function(){
+      console.log("Error");
+    }
+  });
+};
+
+    // var lat = position.coords.latitude;
+    // var lng = position.coords.longitude;
+
+var geocoder;
+var map;
+var marker;
+
+function initialize(lat, lng){
+
+  if(navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+    var latitude = lat;
+    var longitude = lng;
+    console.log(latitude+' '+longitude);
+    //Определение карты
+      var latlng = new google.maps.LatLng(latitude,longitude);
+      var options = {
+        zoom: 15,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.SATELLITE
+      };
+      map = new google.maps.Map(document.getElementById("map_canvas"), options);
+      //Определение геокодера
+      geocoder = new google.maps.Geocoder();
+      marker = new google.maps.Marker({
+        map: map,
+        draggable: true
+      });
+  });
+  } else {
+      alert("Geolocation API не поддерживается в вашем браузере");
+  }
+}
+
+// $(document).ready(function() {
+
+//   initialize();
+
+//   //Добавляем слушателя события обратного геокодирования для маркера при его перемещении
+//   google.maps.event.addListener(marker, 'drag', function() {
+//     geocoder.geocode({'latLng': marker.getPosition()}, function(results, status) {
+//       if (status == google.maps.GeocoderStatus.OK) {
+//         if (results[0]) {
+//           $('#address').val(results[0].formatted_address);
+//           $('#latitude').val(marker.getPosition().lat());
+//           $('#longitude').val(marker.getPosition().lng());
+//         }
+//       }
+//     });
+//   });
+
+// });
