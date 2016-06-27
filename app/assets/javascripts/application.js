@@ -15,3 +15,11 @@
 //= require rails.validations
 //= require fancybox
 //= require_tree .
+
+$(document).ready(function() {
+    $(function() {
+      $('.datepicker').datepicker({
+        dateFormat: 'yy-mm-dd'
+      });
+    });
+});

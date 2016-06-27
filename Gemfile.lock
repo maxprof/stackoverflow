@@ -69,6 +69,7 @@ GEM
     coderay (1.1.1)
     commonjs (0.2.7)
     concurrent-ruby (1.0.1)
+    country-select (1.1.1)
     cucumber (2.4.0)
       builder (>= 2.1.2)
       cucumber-core (~> 1.5.0)
@@ -340,6 +341,7 @@ DEPENDENCIES
   byebug
   capybara
   client_side_validations
+  country-select
   cucumber-rails
   database_cleaner
   devise

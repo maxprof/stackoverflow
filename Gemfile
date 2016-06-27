@@ -56,3 +56,4 @@ gem 'bootstrap-will_paginate'
 gem 'rack-mini-profiler'
 gem "slim-rails"
 gem 'simple_form'
+gem 'country-select'

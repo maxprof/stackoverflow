@@ -7,6 +7,13 @@
     <%= f.input :email, required: true, autofocus: true %>
     <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
     <%= f.input :password_confirmation, required: true %>
+    <%= f.input :login, required: true %>
+    <%= f.label :date_of_birth, class:"control-group" %>
+    <%= f.text_field :date_of_birth, class:"form-control datepicker", required: true %>
+    <%= f.input :city, required: true %>
+    <%= f.input :country, as: :select, collection: ActionView::Helpers::FormOptionsHelper::COUNTRIES  %>
+    <%= f.input :address, required: true %>
+    <%= f.input :avatar %>
   </div>
 
   <div class="form-actions">
