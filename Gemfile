@@ -54,5 +54,5 @@ gem 'pry'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'rack-mini-profiler'
-gem "haml-rails", "~> 0.9"
+gem "slim-rails"
 gem 'simple_form'
