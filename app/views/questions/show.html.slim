@@ -19,14 +19,12 @@ p
 - if @question.tags.any?
   = render @question.tags
 
-
-- @answers.each do |answer|
-  div class="answer_block"
-    = answer.text
-.clearfix
+.answers_block
+  = render @answers
+  .clearfix
 
 -if user_signed_in?
-  = form_for Answer.new do |f|
+  = form_for Answer.new, remote: true do |f|
     = f.hidden_field :user_id, :value => current_user.id
     = f.hidden_field :question_id, :value => @question.id
     = f.text_field :text, required: true
