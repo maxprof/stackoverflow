@@ -73,6 +73,6 @@ class QuestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
-      params.require(:question).permit(:user_id, :positive_vote, :negative_vote, :title, :description)
+      params.require(:question).permit(:user_id, :positive_vote, :negative_vote, :title, :description, tag_ids: [])
     end
 end

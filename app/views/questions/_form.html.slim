@@ -7,14 +7,10 @@
           li = message
 
   .field
-    = f.label :user_id
-    = f.number_field :user_id
+    = f.hidden_field :user_id, :value => current_user.id
   .field
-    = f.label :positive_vote
-    = f.number_field :positive_vote
-  .field
-    = f.label :negative_vote
-    = f.number_field :negative_vote
+    = f.collection_check_boxes :tag_ids, Tag.all, :id, :title do |cd|
+      = cd.label(class: "checkbox-inline input_checkbox") { cd.check_box(class: "checkbox") + cd.text }
   .field
     = f.label :title
     = f.text_field :title

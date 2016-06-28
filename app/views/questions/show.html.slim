@@ -16,10 +16,14 @@ p
   strong Description:
   = @question.description
 
-  - @answers.each do |answer|
-    div class="answer_block"
-      = answer.text
-  .clearfix
+- if @question.tags.any?
+  = render @question.tags
+
+
+- @answers.each do |answer|
+  div class="answer_block"
+    = answer.text
+.clearfix
 
 -if user_signed_in?
   = form_for Answer.new do |f|

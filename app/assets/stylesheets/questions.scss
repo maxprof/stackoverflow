@@ -1,3 +1,13 @@
 // Place all the styles related to the Questions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.post-taglist{
+  margin-bottom: 10px;
+  clear: both;
+  .question_tag{
+    color: #39739d;
+    background-color: #E1ECF4;
+    border-color: transparent;
+    padding: 5px 7px;
+  }
+}
