@@ -1,14 +1,10 @@
 p#notice = notice
-
+p
+  strong Views:
+  = @question.visitors
 p
   strong User:
   = @question.user_id
-p
-  strong Positive vote:
-  = @question.positive_vote
-p
-  strong Negative vote:
-  = @question.negative_vote
 p
   strong Title:
   = @question.title
@@ -19,9 +15,24 @@ p
 - if @question.tags.any?
   = render @question.tags
 
+
+  .clearfix
+
+
+= link_to like_question_path(@question),  class: "like", method: :put do
+  button.btn.btn-info aria-label=("Left Align") type="button"
+    span.glyphicon.glyphicon-thumbs-up.glyphicon-align-center aria-hidden="true"
+    span.badge= @question.get_upvotes.size
+
+= link_to unlike_question_path(@question), class: "like", method: :put do
+  button.btn.btn-info aria-label=("Left Align") type="button"
+    span.glyphicon.glyphicon-thumbs-down.glyphicon-align-center aria-hidden="true"
+    span.badge= @question.get_downvotes.size
+.clearfix
+
 .answers_block
   = render @answers
-  .clearfix
+.clearfix
 
 -if user_signed_in?
   = form_for Answer.new, remote: true do |f|
@@ -29,9 +40,7 @@ p
     = f.hidden_field :question_id, :value => @question.id
     = f.text_field :text, required: true
     = f.submit class:"btn btn-primary"
-
-
-
+br
 = link_to 'Edit', edit_question_path(@question)
 '|
 = link_to 'Back', questions_path

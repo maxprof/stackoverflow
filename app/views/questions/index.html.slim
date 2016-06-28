@@ -4,8 +4,6 @@ table
   thead
     tr
       th User
-      th Positive vote
-      th Negative vote
       th Title
       th Description
       th
@@ -16,8 +14,6 @@ table
     - @questions.each do |question|
       tr
         td = question.user_id
-        td = question.positive_vote
-        td = question.negative_vote
         td = question.title
         td = question.description
         td = link_to 'Show', question

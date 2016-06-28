@@ -57,3 +57,4 @@ gem 'rack-mini-profiler'
 gem "slim-rails"
 gem 'simple_form'
 gem 'country-select'
+gem 'acts_as_votable', '~> 0.10.0'

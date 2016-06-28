@@ -1,6 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_question, only: [:show, :edit, :update, :destroy, :upvote,:downvote]
   # GET /questions
   # GET /questions.json
   def index
@@ -10,6 +9,7 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
+    @question.increment(:visitors)
     get_answers
   end
 
@@ -20,6 +20,16 @@ class QuestionsController < ApplicationController
 
   # GET /questions/1/edit
   def edit
+  end
+
+  def upvote
+    @question.upvote_from current_user
+    redirect_to questions_path
+  end
+
+  def downvote
+    @question.downvote_from current_user
+    redirect_to questions_path
   end
 
   # POST /questions
