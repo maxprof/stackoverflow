@@ -1,0 +1,35 @@
+p#notice = notice
+
+p
+  strong User:
+  = @question.user_id
+p
+  strong Positive vote:
+  = @question.positive_vote
+p
+  strong Negative vote:
+  = @question.negative_vote
+p
+  strong Title:
+  = @question.title
+p
+  strong Description:
+  = @question.description
+
+  - @answers.each do |answer|
+    div class="answer_block"
+      = answer.text
+  .clearfix
+
+-if user_signed_in?
+  = form_for Answer.new do |f|
+    = f.hidden_field :user_id, :value => current_user.id
+    = f.hidden_field :question_id, :value => @question.id
+    = f.text_field :text, required: true
+    = f.submit class:"btn btn-primary"
+
+
+
+= link_to 'Edit', edit_question_path(@question)
+'|
+= link_to 'Back', questions_path

@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong User:
+  = @answer.user_id
+p
+  strong Text:
+  = @answer.text
+p
+  strong Positive vote:
+  = @answer.positive_vote
+p
+  strong Negative vote:
+  = @answer.negative_vote
+
+= link_to 'Edit', edit_answer_path(@answer)
+'|
+= link_to 'Back', answers_path

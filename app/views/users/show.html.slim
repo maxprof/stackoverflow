@@ -17,25 +17,18 @@ div class="col-md-4"
   = image_tag @user.avatar.url(:medium), class:"img-responsive"
 div class="col-md-8"
   = simple_form_for(@user) do |form|
-    = form.text_field :login, class:"form-control", placeholder: "Enter your login"
-    br
-    = form.text_field :email, class:"form-control", placeholder: "Enter your email"
-    br
-    = form.text_field :password, class:"form-control", placeholder: "Enter your password"
-    br
-    = form.text_field :password_confirmation, class:"form-control", placeholder: "Enter confirmation password"
-    br
-    = form.text_field :date_of_birth, class:"form-control datepicker"
-    br
+    = form.input :login, class:"form-control", placeholder: "Enter your login"
+    = form.input :email, class:"form-control", placeholder: "Enter your email"
+    = form.input :password, class:"form-control", placeholder: "Enter your password"
+    = form.input :password_confirmation, class:"form-control", placeholder: "Enter confirmation password"
+    = form.input :date_of_birth, class:"form-control datepicker"
     = form.input :country, as: :select, collection: ActionView::Helpers::FormOptionsHelper::COUNTRIES
-    = form.text_field :city, class:"form-control", placeholder: "Enter your city"
-    br
-    = form.text_field :address, class:"form-control", placeholder: "Enter your address"
-    br
-    = form.file_field :avatar
-    br
+    = form.input :city, class:"form-control", placeholder: "Enter your city"
+    = form.input :address, class:"form-control", placeholder: "Enter your address"
+    = form.input :avatar
     = form.submit "Update user profile", class:"btn btn-danger"
 br/
+h1 id="map_label" class="text-center" Your current location
 #map_canvas style=("width:100%; height:600px")
 br/
 

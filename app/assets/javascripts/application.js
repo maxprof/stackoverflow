@@ -56,15 +56,14 @@ function initialize(lat, lng) {
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
-                console.log("null");
-                console.log(lat + " " + lng);
                 var lat = position.coords.latitude;
                 var lng = position.coords.longitude;
                 var latlng = new google.maps.LatLng(lat, lng);
                 var options = {
-                    zoom: 15,
+                    zoom: 18,
                     center: latlng,
-                    mapTypeId: google.maps.MapTypeId.SATELLITE
+                    mapTypeId: google.maps.MapTypeId.SATELLITE,
+                    v: 3
                 };
                 map = new google.maps.Map(document.getElementById("map_canvas"), options);
                 //Определение геокодера
@@ -76,15 +75,15 @@ function initialize(lat, lng) {
             })
         }
     } else {
-        console.log("not null");
         //Определение карты
         var lat = lat;
         var lng = lng;
         var latlng = new google.maps.LatLng(lat, lng);
         var options = {
-            zoom: 15,
+            zoom: 18,
             center: latlng,
-            mapTypeId: google.maps.MapTypeId.SATELLITE
+            mapTypeId: google.maps.MapTypeId.SATELLITE,
+            v: 3
         };
         map = new google.maps.Map(document.getElementById("map_canvas"), options);
         //Определение геокодера
@@ -93,6 +92,7 @@ function initialize(lat, lng) {
             map: map,
             draggable: true
         });
+        $("#map_label").html("Selected address");
     }
 }
 

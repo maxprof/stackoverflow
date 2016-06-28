@@ -1,0 +1,24 @@
+= form_for @question do |f|
+  - if @question.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@question.errors.count, "error")} prohibited this question from being saved:"
+      ul
+        - @question.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :user_id
+    = f.number_field :user_id
+  .field
+    = f.label :positive_vote
+    = f.number_field :positive_vote
+  .field
+    = f.label :negative_vote
+    = f.number_field :negative_vote
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :description
+    = f.text_area :description
+  .actions = f.submit

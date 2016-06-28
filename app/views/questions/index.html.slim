@@ -1,0 +1,29 @@
+h1 Listing questions
+
+table
+  thead
+    tr
+      th User
+      th Positive vote
+      th Negative vote
+      th Title
+      th Description
+      th
+      th
+      th
+
+  tbody
+    - @questions.each do |question|
+      tr
+        td = question.user_id
+        td = question.positive_vote
+        td = question.negative_vote
+        td = question.title
+        td = question.description
+        td = link_to 'Show', question
+        td = link_to 'Edit', edit_question_path(question)
+        td = link_to 'Destroy', question, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Question', new_question_path
