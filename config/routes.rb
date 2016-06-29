@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   resources :tags
-  resources :answers
+  resources :answers do
+    member do
+      put "like" => "answers#upvote"
+      put "unlike" => "answers#downvote"
+    end
+  end
   resources :questions do
     member do
       put "like" => "questions#upvote"

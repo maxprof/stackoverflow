@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  acts_as_voter
   def show
     @user = User.find(params[:id])
   end

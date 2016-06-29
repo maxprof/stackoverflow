@@ -15,21 +15,17 @@ p
 - if @question.tags.any?
   = render @question.tags
 
-
-  .clearfix
-
-
-= link_to like_question_path(@question),  class: "like", method: :put do
-  button.btn.btn-info aria-label=("Left Align") type="button"
-    span.glyphicon.glyphicon-thumbs-up.glyphicon-align-center aria-hidden="true"
-    span.badge= @question.get_upvotes.size
-
-= link_to unlike_question_path(@question), class: "like", method: :put do
-  button.btn.btn-info aria-label=("Left Align") type="button"
-    span.glyphicon.glyphicon-thumbs-down.glyphicon-align-center aria-hidden="true"
-    span.badge= @question.get_downvotes.size
 .clearfix
-
+- if user_signed_in?
+  = link_to like_question_path(@question),  class: "like", method: :put do
+    button.btn.btn-info aria-label=("Left Align") type="button"
+      span.glyphicon.glyphicon-thumbs-up.glyphicon-align-center aria-hidden="true"
+      span.badge= @question.get_upvotes.size
+  = link_to unlike_question_path(@question), class: "like", method: :put do
+    button.btn.btn-info aria-label=("Left Align") type="button"
+      span.glyphicon.glyphicon-thumbs-down.glyphicon-align-center aria-hidden="true"
+      span.badge= @question.get_downvotes.size
+.clearfix
 .answers_block
   = render @answers
 .clearfix

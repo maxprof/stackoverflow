@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy, :upvote,:downvote]
+  before_action :check_rules, only: [:new, :edit, :update, :destroy]
   # GET /questions
   # GET /questions.json
   def index
@@ -24,12 +25,10 @@ class QuestionsController < ApplicationController
 
   def upvote
     @question.upvote_from current_user
-    redirect_to questions_path
   end
 
   def downvote
     @question.downvote_from current_user
-    redirect_to questions_path
   end
 
   # POST /questions
@@ -84,5 +83,21 @@ class QuestionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def question_params
       params.require(:question).permit(:user_id, :positive_vote, :negative_vote, :title, :description, tag_ids: [])
+    end
+
+    def check_rules
+      if user_signed_in?
+        @user = current_user
+        if  @user.role == "admin"
+          flash[:danger] = "You should have 'moderator' role to do this operation"
+          redirect_to questions_path
+        elsif @user.role == nil and @question.user_id != @user.id
+          flash[:danger] = "It's not your question"
+          redirect_to questions_path
+        end
+      else
+        flash[:danger] = "You dont signed in to do this operation"
+        redirect_to questions_path
+      end
     end
 end

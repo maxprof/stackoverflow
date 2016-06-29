@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
-  before_action :set_answer, only: [:show, :edit, :update, :destroy]
+  before_action :set_answer, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+  before_action :check_rules, only: [:new, :edit, :update, :destroy, :upvote,:downvote]
 
   # GET /answers
   # GET /answers.json
@@ -10,6 +11,7 @@ class AnswersController < ApplicationController
   # GET /answers/1
   # GET /answers/1.json
   def show
+    redirect_to (:back)
   end
 
   # GET /answers/new
@@ -35,7 +37,6 @@ class AnswersController < ApplicationController
         format.html { render :new }
         format.json { render json: @answer.errors, status: :unprocessable_entity }
         format.js
-
       end
     end
   end
@@ -63,7 +64,15 @@ class AnswersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def upvote
+    @answer.upvote_from current_user
+    redirect_to questions_path
+  end
 
+  def downvote
+    @answer.downvote_from current_user
+    redirect_to questions_path
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_answer
@@ -74,4 +83,21 @@ class AnswersController < ApplicationController
     def answer_params
       params.require(:answer).permit(:user_id, :text, :positive_vote, :negative_vote, :question_id)
     end
+
+    def check_rules
+      if user_signed_in?
+        @user = current_user
+        if  @user.role == "admin"
+          flash[:danger] = "You should have 'moderator' role to do this operation"
+          redirect_to questions_path
+        elsif @user.role == nil and @answer.user_id != @user.id
+          flash[:danger] = "It's not your answer"
+          redirect_to questions_path
+        end
+      else
+        flash[:danger] = "You dont signed in to do this operation"
+        redirect_to questions_path
+      end
+    end
+
 end

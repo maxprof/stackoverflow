@@ -1,2 +1,18 @@
 div class="answer_block"
   = answer.text
+  - if user_signed_in?
+    = link_to like_answer_path(answer),  class: "like", method: :put do
+      button.btn.btn-info aria-label=("Left Align") type="button"
+        span.glyphicon.glyphicon-thumbs-up.glyphicon-align-center aria-hidden="true"
+        span.badge= answer.get_upvotes.size
+    = link_to unlike_answer_path(answer), class: "like", method: :put do
+      button.btn.btn-info aria-label=("Left Align") type="button"
+        span.glyphicon.glyphicon-thumbs-down.glyphicon-align-center aria-hidden="true"
+        span.badge= answer.get_downvotes.size
+    br/
+    div class="hidden_edit_form hidden_edit_form_#{answer.id}"
+      = render "answers/quick", answer: answer
+    - if answer.user_id == current_user.id
+      div class="btn btn-warning show_edit_form show_edit_form_#{answer.id}"
+        | Edit
+      = link_to 'Destroy', answer, data: {:confirm => 'Are you sure?'}, :method => :delete, class:"btn btn-danger"
