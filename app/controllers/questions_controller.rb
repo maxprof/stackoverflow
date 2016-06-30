@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy, :upvote,:downvote]
-  before_action :check_rules, only: [:new, :edit, :update, :destroy]
+  before_action :check_rules, only: [:edit, :update, :destroy]
+  helper_method :votes_count
   # GET /questions
   # GET /questions.json
   def index
@@ -10,7 +11,14 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
-    @question.increment(:visitors)
+    if @question.visitors == nil
+      @question.visitors = 0
+      @question.increment(:visitors, 1)
+      @question.save
+    else
+      @question.increment(:visitors, 1)
+      @question.save
+    end
     get_answers
   end
 
@@ -72,8 +80,15 @@ class QuestionsController < ApplicationController
   end
 
   private
+
+    def votes_count(answer)
+      @answer = Answer.find(answer.id)
+      @votes = @answer.get_upvotes.size - @answer.get_downvotes.size
+      return @votes
+    end
+
     def get_answers
-      @answers = Answer.where(question_id: @question.id).order(created_at: :desc)
+      @answers = Answer.where(question_id: @question.id).order('@votes DESC')
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_question
@@ -88,10 +103,10 @@ class QuestionsController < ApplicationController
     def check_rules
       if user_signed_in?
         @user = current_user
-        if  @user.role == "admin"
-          flash[:danger] = "You should have 'moderator' role to do this operation"
+        if  @user.role != "moder" && @question.user_id != current_user.id
+          flash[:danger] = "it's not tour question, you should have 'moderator' role to do this operation"
           redirect_to questions_path
-        elsif @user.role == nil and @question.user_id != @user.id
+        elsif @user.role == nil && @question.user_id != @user.id
           flash[:danger] = "It's not your question"
           redirect_to questions_path
         end

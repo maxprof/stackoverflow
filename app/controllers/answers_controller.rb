@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   before_action :set_answer, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
-  before_action :check_rules, only: [:new, :edit, :update, :destroy, :upvote,:downvote]
+  before_action :check_rules, only: [:new, :edit, :update, :destroy]
 
   # GET /answers
   # GET /answers.json
@@ -87,8 +87,8 @@ class AnswersController < ApplicationController
     def check_rules
       if user_signed_in?
         @user = current_user
-        if  @user.role == "admin"
-          flash[:danger] = "You should have 'moderator' role to do this operation"
+        if  @user.role != "moder" && @answer.user_id != current_user.id
+          flash[:danger] = "it's not tour question, you should have 'moderator' role to do this operation"
           redirect_to questions_path
         elsif @user.role == nil and @answer.user_id != @user.id
           flash[:danger] = "It's not your answer"

@@ -1,0 +1,44 @@
+div class="col-md-6 col-md-offset-4"
+  =will_paginate @users
+- @users.each do |user|
+
+  div class="row"
+    div class="user_block"
+      div class="col-md-3"
+        = image_tag user.avatar.url(:medium)
+    div class="col-md-9"
+      div class="user_login_block"
+        h1
+          = user.login
+        p
+          = user.name
+        p
+          = user.country
+        p
+          = user.city
+        p
+          = user.address
+        br/
+        - if get_user_ranking(user) < 0
+          div class="user_info_block user_ranking_red"
+            = get_user_ranking(user)
+            br/
+            p
+              | ranking
+        - else
+          div class="user_info_block user_ranking_green"
+            = get_user_ranking(user)
+            br/
+            p
+              | ranking
+        div class="user_info_block_counts"
+          | Questions
+          br/
+          =user.questions.count
+        div class="user_info_block_counts"
+          | Answers
+          br/
+          =user.answers.count
+div class="clearfix"
+div class="col-md-6 col-md-offset-4"
+  =will_paginate @users

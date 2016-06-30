@@ -14,3 +14,36 @@
  *= require fancybox
  *= require_tree .
  */
+.votes_block_red, .user_ranking_red{
+  background-color: rgba(241, 175, 175, 0.9);
+}
+.votes_block_green, .user_ranking_green{
+  background-color: rgba(193, 218, 188, 0.9);
+}
+.question_information{
+  padding: 10px;
+}
+.user_info_block {
+  width: 80px;
+  height: 60px;
+  padding: 10px;
+  text-align: center;
+  margin-top: 20px;
+  float:left;
+  margin-right: 5px;
+}
+.user_info_block_counts {
+    width: 80px;
+    height: 60px;
+    float: left;
+    background-color: rgba(181, 181, 181, 0.9);
+    text-align: center;
+    padding: 10px;
+    margin: 20px 5px;
+}
+.user_block {
+  margin: 20px 0px;
+  img {
+    width: 188px;
+  }
+}
