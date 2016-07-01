@@ -1,23 +1,23 @@
 div class="answer_block"
-  - if user_signed_in?
-    div class="row"
-      div class="col-md-4"
-        p
-          | Autor:
-          = answer.user_login
-          br/
-          = image_tag answer.user_avatar.url(:thumb)
-        = link_to like_answer_path(answer),  class: "like", method: :put do
-          button.btn.btn-info aria-label=("Left Align") type="button"
-            span.glyphicon.glyphicon-thumbs-up.glyphicon-align-center aria-hidden="true"
-            span.badge= answer.get_upvotes.size
-        = link_to unlike_answer_path(answer), class: "like", method: :put do
-          button.btn.btn-info aria-label=("Left Align") type="button"
-            span.glyphicon.glyphicon-thumbs-down.glyphicon-align-center aria-hidden="true"
-            span.badge= answer.get_downvotes.size
-      div class="col-md-8"
-        = answer.text
+  div class="row"
+    div class="col-md-4"
+      p
+        | Autor:
+        = answer.user_login
         br/
+        = image_tag answer.user_avatar.url(:thumb)
+      = link_to like_answer_path(answer),  class: "like", method: :put do
+        button.btn.btn-info aria-label=("Left Align") type="button"
+          span.glyphicon.glyphicon-thumbs-up.glyphicon-align-center aria-hidden="true"
+          span.badge= answer.get_upvotes.size
+      = link_to unlike_answer_path(answer), class: "like", method: :put do
+        button.btn.btn-info aria-label=("Left Align") type="button"
+          span.glyphicon.glyphicon-thumbs-down.glyphicon-align-center aria-hidden="true"
+          span.badge= answer.get_downvotes.size
+    div class="col-md-8"
+      = answer.text
+      br/
+      - if user_signed_in?
         div class="hidden_edit_form hidden_edit_form_#{answer.id}"
           = render "answers/quick", answer: answer
         - if answer.user_id == current_user.id

@@ -39,6 +39,9 @@ div class="col-md-6 col-md-offset-4"
           | Answers
           br/
           =user.answers.count
+        -if user_signed_in? && current_user.role == "admin"
+          div class="user_info_block_counts"
+            = link_to 'Destroy', user, data: {:confirm => 'Are you sure?'}, :method => :delete
 div class="clearfix"
 div class="col-md-6 col-md-offset-4"
   =will_paginate @users
