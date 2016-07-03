@@ -4,5 +4,5 @@ class Question < ActiveRecord::Base
   has_many :question_tags
   has_many :tags, through: :question_tags
   acts_as_votable
-  delegate :login, :avatar, :to => :user, :prefix => true
+  delegate :login, :email, :avatar, :to => :user, :prefix => true
 end

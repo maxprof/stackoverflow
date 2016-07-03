@@ -2,10 +2,14 @@ div class="answer_block"
   div class="row"
     div class="col-md-4"
       p
-        | Autor:
-        = answer.user_login
-        br/
-        = image_tag answer.user_avatar.url(:thumb)
+        - if current_user.login == nil
+          | Autor:
+          = answer.user_email
+        - else
+          | Autor:
+          = answer.user_login
+          br/
+          = image_tag answer.user_avatar.url(:thumb)
       = link_to like_answer_path(answer),  class: "like", method: :put do
         button.btn.btn-info aria-label=("Left Align") type="button"
           span.glyphicon.glyphicon-thumbs-up.glyphicon-align-center aria-hidden="true"

@@ -20,10 +20,16 @@ h1 class="text-center"
           = link_to question.title, question_path(question), class: "question_link"
         = render question.tags
         div class="text-right"
-          div class="user_login_home"
-            = link_to question.user_login, user_path(question.user)
-          div class="user_avatar"
-            = image_tag question.user_avatar.url(:thumb)
+          - if current_user.login == nil
+            div class="user_login_home"
+              = link_to question.user_email, user_path(question.user)
+          - else
+            div class="user_login_home"
+              = link_to question.user_login, user_path(question.user)
+            div class="user_avatar"
+              = image_tag question.user_avatar.url(:thumb)
+
+
         hr
   div class="clearfix"
   div class="col-md-6 col-md-offset-4"

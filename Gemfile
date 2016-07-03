@@ -37,9 +37,9 @@ end
 gem 'therubyracer'
 gem 'devise'
 gem 'omniauth'
-gem 'omniauth-digitalocean'
 gem 'omniauth-vkontakte'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 gem "table_print"
 gem 'gon'
 gem "less-rails"

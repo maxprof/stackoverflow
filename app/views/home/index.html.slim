@@ -1,7 +1,7 @@
 div class="col-md-6 col-md-offset-4"
   =will_paginate @questions
 - @questions.each do |question|
-  div class="col-md-10 question_block"
+  div class="col-md-12 question_block"
     div class="col-md-3"
       div class="col-md-4 question_information"
         div class="info_label text-center"
@@ -30,11 +30,15 @@ div class="col-md-6 col-md-offset-4"
         = link_to question.title, question_path(question), class: "question_link"
       = render question.tags
       div class="text-right"
-        div class="user_login_home"
-          = link_to question.user_login, user_path(question.user)
-        div class="user_avatar"
-          = image_tag question.user_avatar.url(:thumb)
-      hr
+        - if current_user.login == nil
+          div class="user_login_home"
+            = link_to question.user_email, user_path(question.user)
+        - else
+          div class="user_login_home"
+            = link_to question.user_login, user_path(question.user)
+          div class="user_avatar"
+            = image_tag question.user_avatar.url(:thumb)
 div class="clearfix"
 div class="col-md-6 col-md-offset-4"
   =will_paginate @questions
+  = link_to "Add new question", new_question_path, class:"btn btn-primary"

@@ -64,15 +64,19 @@ class AnswersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
   def upvote
     @answer.upvote_from current_user, :vote_weight =>  1
-    redirect_to(:back)
+    respond_to do |format|
+      format.js
+    end
   end
 
   def downvote
     @answer.downvote_from current_user, :vote_weight => -1
-    redirect_to(:back)
+    format.js
   end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_answer

@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 
     def check_admin_rules
       if user_signed_in?
-        if current_user.role != "admin"
+        if current_user.role != "admin" && current_user.role != nil
           flash[:success] = "You have no rights"
           redirect_to (:back)
         end

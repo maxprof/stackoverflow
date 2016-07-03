@@ -9,7 +9,10 @@ div class="col-md-6 col-md-offset-4"
     div class="col-md-9"
       div class="user_login_block"
         h1
-          = link_to user.login, user_path(user)
+          - if user.login == nil
+            = link_to user.email, user_path(user)
+          - else
+            = link_to user.login, user_path(user)
         p
           = user.name
         p
