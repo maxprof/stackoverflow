@@ -30,7 +30,7 @@ div class="col-md-6 col-md-offset-4"
         = link_to question.title, question_path(question), class: "question_link"
       = render question.tags
       div class="text-right"
-        - if current_user.login == nil
+        - if question.user_login == nil
           div class="user_login_home"
             = link_to question.user_email, user_path(question.user)
         - else

@@ -2,7 +2,7 @@ div class="answer_block"
   div class="row"
     div class="col-md-4"
       p
-        - if current_user.login == nil
+        - if answer.user_login == nil
           | Autor:
           = answer.user_email
         - else
