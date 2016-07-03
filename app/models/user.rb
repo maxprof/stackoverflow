@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
   has_many :questions, :dependent => :destroy
   has_many :answers, :dependent => :destroy
-
+  validates :email, uniqueness: true
 
   def self.from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

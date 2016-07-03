@@ -11,7 +11,7 @@ class AnswersController < ApplicationController
   # GET /answers/1
   # GET /answers/1.json
   def show
-    redirect_to (:back)
+    redirect_to(:back)
   end
 
   # GET /answers/new
@@ -65,13 +65,13 @@ class AnswersController < ApplicationController
     end
   end
   def upvote
-    @answer.upvote_from current_user
-    redirect_to questions_path
+    @answer.upvote_from current_user, :vote_weight =>  1
+    redirect_to(:back)
   end
 
   def downvote
-    @answer.downvote_from current_user
-    redirect_to questions_path
+    @answer.downvote_from current_user, :vote_weight => -1
+    redirect_to(:back)
   end
   private
     # Use callbacks to share common setup or constraints between actions.

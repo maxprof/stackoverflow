@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160628171753) do
+ActiveRecord::Schema.define(version: 20160703091439) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "text"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "question_id"
+    t.integer  "cached_weighted_total", default: 0
   end
 
   create_table "question_tags", force: :cascade do |t|
@@ -30,9 +31,10 @@ ActiveRecord::Schema.define(version: 20160628171753) do
     t.integer  "user_id"
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.integer  "visitors"
+    t.integer  "cached_weighted_total", default: 0
   end
 
   create_table "tags", force: :cascade do |t|

@@ -32,11 +32,13 @@ class QuestionsController < ApplicationController
   end
 
   def upvote
-    @question.upvote_from current_user
+    @question.upvote_from current_user, :vote_weight =>  1
+    redirect_to(:back)
   end
 
   def downvote
-    @question.downvote_from current_user
+    @question.downvote_from current_user, :vote_weight => -1
+    redirect_to(:back)
   end
 
   # POST /questions
@@ -88,7 +90,7 @@ class QuestionsController < ApplicationController
     end
 
     def get_answers
-      @answers = Answer.where(question_id: @question.id).order('@votes DESC')
+      @answers = Answer.where(question_id: @question.id).order('cached_weighted_total DESC')
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_question
