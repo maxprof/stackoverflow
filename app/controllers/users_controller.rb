@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   helper_method :get_user_ranking
   before_action :check_rules, only: [:destroy, :show]
-  before_action :check_admin_rules, only: [:show, :edit, :update]
+  before_action :check_admin_rules, only: [:edit, :update]
 
   def new
     @user = User.new
@@ -89,7 +89,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-       params.require(:user).permit(:email, :avatar, :login, :country, :date_of_birth, :city, :address)
+       params.require(:user).permit(:email, :avatar, :login, :country, :date_of_birth, :city, :address, :role)
     end
 end
 

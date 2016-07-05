@@ -26,7 +26,7 @@ div class="col-md-4"
     = @question.visitors
     .clearfix
     div class="my-margin"
-    - if  user_signed_in? && @question.user_id == current_user.id
+    - if  user_signed_in? && (@question.user_id == current_user.id || current_user.role == "moder")
       = link_to 'Edit', edit_question_path(@question), class:"btn btn-warning"
       = link_to 'Back', :back, class:"btn btn-danger"
 
