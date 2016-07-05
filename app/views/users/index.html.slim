@@ -1,7 +1,26 @@
 div class="col-md-6 col-md-offset-4"
   =will_paginate @users
-- @users.each do |user|
+  - if user_signed_in? && current_user.role == "admin"
+    = link_to "Add new user", '#data',  class:"btn btn-primary fancybox"
+div class="hidden"
+  div id="data"
+    = simple_form_for User.new do |f|
+      = f.error_notification
+      .form-inputs
+        = f.input :email, required: true, autofocus: true
+        = f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
+        = f.input :password_confirmation, required: true
+        = f.input :login, required: true
+        = f.label :date_of_birth, class:"control-group"
+        = f.text_field :date_of_birth, class:"form-control datepicker", required: true
+        = f.input :country, as: :select, collection: ActionView::Helpers::FormOptionsHelper::COUNTRIES
+        = f.input :city, required: true
+        = f.input :address, required: true
+        = f.input :avatar
+      .form-actions
+        = f.button :submit, "Sign up"
 
+- @users.each do |user|
   div class="row"
     div class="user_block"
       div class="col-md-3"
@@ -48,3 +67,7 @@ div class="col-md-6 col-md-offset-4"
 div class="clearfix"
 div class="col-md-6 col-md-offset-4"
   =will_paginate @users
+javascript:
+  $(document).ready(function() {
+    $("a.fancybox").fancybox();
+  });

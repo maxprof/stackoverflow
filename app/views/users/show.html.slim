@@ -25,6 +25,9 @@ div class="col-md-8"
     = form.input :country, as: :select, collection: ActionView::Helpers::FormOptionsHelper::COUNTRIES
     = form.input :city, class:"form-control", placeholder: "Enter your city"
     = form.input :address, class:"form-control", placeholder: "Enter your address"
+    if current_user.role == "admin"
+      = form.input :role, class:"form-control", placeholder: "User role"
+    end
     = form.input :avatar
     = form.submit "Update user profile", class:"btn btn-danger"
 br/

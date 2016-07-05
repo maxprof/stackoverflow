@@ -77,3 +77,27 @@ button.btn.btn-info {
 .btn .badge {
     color: #337ab7!important;
 }
+a.btn.btn-warning {
+    margin-right: 5px;
+}
+textarea#answer_text {
+    width: 50%;
+    float: left;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.post-taglist {
+    margin-bottom: 10px !important;
+    clear: none !important;
+    float: left;
+    a {
+        margin-right: 10px;
+    }
+}
+.my-margin{
+    margin: 10px 0px;
+}
+.sub-margin{
+    margin-top: 10px;
+}

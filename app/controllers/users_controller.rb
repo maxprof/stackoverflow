@@ -1,7 +1,21 @@
 class UsersController < ApplicationController
   helper_method :get_user_ranking
-  before_action :check_rules, only: [:destroy]
+  before_action :check_rules, only: [:destroy, :show]
   before_action :check_admin_rules, only: [:show, :edit, :update]
+
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      flash[:success] = "User was successufly created"
+      redirect_to(:back)
+    else
+      render 'new'
+    end
+  end
 
   def show
     @user = User.find(params[:id])
@@ -29,12 +43,14 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.paginate(page: params[:page], per_page: 5).order('@user_ranking DESC')
+    @users = User.paginate(page: params[:page], per_page: 5).order('created_at DESC')
   end
 
   private
 
     def check_rules
+    @user = User.find(params[:id])
+
       if user_signed_in?
         if current_user.role != "admin" && current_user.id != @user.id
           flash[:success] = "It's not your profile"

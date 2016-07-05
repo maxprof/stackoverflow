@@ -67,14 +67,16 @@ class AnswersController < ApplicationController
 
   def upvote
     @answer.upvote_from current_user, :vote_weight =>  1
-    respond_to do |format|
-      format.js
-    end
+    # respond_to do |format|
+    #   format.js
+    # end
   end
 
   def downvote
     @answer.downvote_from current_user, :vote_weight => -1
-    format.js
+    # respond_to do |format|
+    #   format.js
+    # end
   end
 
   private
