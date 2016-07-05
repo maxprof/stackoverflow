@@ -8,7 +8,7 @@ div class="answer_block"
         - else
           = answer.user_login
           br/
-          = image_tag answer.user_avatar.url, class:"answe_author_img"
+          = image_tag answer.user_avatar.url, class:"answer_author_img"
           .clearfix
         - if user_signed_in?
           - if current_user.voted_up_on? answer
