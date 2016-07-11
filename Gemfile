@@ -22,7 +22,8 @@ group :test do
   gem 'email_spec'
   gem 'timecop'
   gem 'launchy'
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', :require => false
+  gem 'faker'
 end
 group :development do
   gem 'web-console', '~> 2.0'

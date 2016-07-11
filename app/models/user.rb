@@ -1,10 +1,8 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable,
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable,
          :omniauthable, :omniauth_providers => [:vkontakte, :facebook, :twitter]
-
   # has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
-  #
   has_attached_file :avatar,
     :storage => :dropbox,
     :dropbox_credentials => Rails.root.join("config/dropbox.yml"),
@@ -13,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :questions, :dependent => :destroy
   has_many :answers, :dependent => :destroy
   validates :email, uniqueness: true
+  validates :email, presence: true
   acts_as_voter
   def self.from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

@@ -49,8 +49,6 @@ class UsersController < ApplicationController
   private
 
     def check_rules
-    @user = User.find(params[:id])
-
       if user_signed_in?
         if current_user.role != "admin" && current_user.id != @user.id
           flash[:success] = "It's not your profile"

@@ -16,15 +16,20 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { :host => 'cinema-booking.herokuapp.com', :protocol => 'https' }
+  config.action_mailer.default_url_options = { :host => 'maxprof-stackoverflow.herokuapp.com', :protocol => 'https' }
+  config.action_mailer.smtp_settings = {
+    :address => "127.0.0.1",
+    :port    => 25,
+    :domain  => 'maxprof-stackoverflow.herokuapp.com'
+  }
 end
 
-ActionMailer::Base.smtp_settings = {
-  :address => 'smtp.sendgrid.net',
-  :port => '587',
-  :authentication => :plain,
-  :user_name => 'maxprofkom@gmail.com',
-  :password => '544752lost',
-  :domain => 'heroku.com',
-  :enable_starttls_auto => true
-}
+# ActionMailer::Base.smtp_settings = {
+#   :address => 'smtp.sendgrid.net',
+#   :port => '587',
+#   :authentication => :plain,
+#   :user_name => 'maxprofkom@gmail.com',
+#   :password => '544752lost',
+#   :domain => 'heroku.com',
+#   :enable_starttls_auto => true
+# }

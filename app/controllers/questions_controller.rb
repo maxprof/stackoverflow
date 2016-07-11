@@ -45,29 +45,22 @@ class QuestionsController < ApplicationController
   # POST /questions.json
   def create
     @question = Question.new(question_params)
-
-    respond_to do |format|
-      if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
-        format.json { render :show, status: :created, location: @question }
-      else
-        format.html { render :new }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
-      end
+    if @question.save
+      flash[:success]= 'Question was successfully created.'
+      redirect_to @question
+    else
+      render 'new'
     end
   end
 
   # PATCH/PUT /questions/1
   # PATCH/PUT /questions/1.json
   def update
-    respond_to do |format|
-      if @question.update(question_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
-        format.json { render :show, status: :ok, location: @question }
-      else
-        format.html { render :edit }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
-      end
+    if @question.update(question_params)
+      flash[:success] = "Question was successufly updated"
+      redirect_to question_path(@question)
+    else
+      render 'edit'
     end
   end
 
@@ -75,10 +68,8 @@ class QuestionsController < ApplicationController
   # DELETE /questions/1.json
   def destroy
     @question.destroy
-    respond_to do |format|
-      format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    flash[:success] = "Question was successfully destroyed."
+    redirect_to questions_url
   end
 
   private
@@ -106,8 +97,8 @@ class QuestionsController < ApplicationController
       if user_signed_in?
         @user = current_user
         if  @user.role != "moder" && @question.user_id != current_user.id
-          flash[:danger] = "it's not tour question, you should have 'moderator' role to do this operation"
-          redirect_to questions_path
+          flash[:danger] = "it's not your question, you should have 'moderator' role to do this operation"
+          redirect_to root_path
         elsif @user.role == nil && @question.user_id != @user.id
           flash[:danger] = "It's not your question"
           redirect_to questions_path
