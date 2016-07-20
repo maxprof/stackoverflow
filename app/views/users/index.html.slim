@@ -23,8 +23,12 @@ div class="hidden"
 - @users.each do |user|
   div class="row"
     div class="user_block"
-      div class="col-md-3"
-        = image_tag user.avatar.url
+      - if !user.avatar_file_name
+        div class="col-md-3"
+          = image_tag("https://d13yacurqjgara.cloudfront.net/users/4085/screenshots/2072398/gravatar.png", class:"img-responsive img-circle avatar_img")
+      - else
+        div class="col-md-3"
+          = image_tag user.avatar.url
     div class="col-md-9"
       div class="user_login_block"
         h1

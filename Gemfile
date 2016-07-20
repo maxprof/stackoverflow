@@ -60,3 +60,4 @@ gem 'simple_form'
 gem 'country-select'
 gem 'acts_as_votable', '~> 0.10.0'
 gem "paperclip-dropbox", ">= 1.1.7"
+
